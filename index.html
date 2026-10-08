@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Conto: Pré-modernismo e Modernismo – Atividades</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f6f3f9;--card:#fff;--tx:#1f1b24;--mut:#6b6475;--ac:#7a5a9c;--bd:#d9cfe4;--err:#c0392b;--ok:#2e7d5b}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17141b;--card:#221e28;--tx:#efeaf4;--mut:#a79eb3;--ac:#b595d8;--bd:#3a3345;--err:#ff7b6b;--ok:#6fcf9f}}
+:root[data-theme="dark"]{--bg:#17141b;--card:#221e28;--tx:#efeaf4;--mut:#a79eb3;--ac:#b595d8;--bd:#3a3345;--err:#ff7b6b;--ok:#6fcf9f}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{background:var(--ac);color:#fff;padding:22px 16px}
+header h1{margin:0;font-size:1.4rem}header p{margin:6px 0 0;opacity:.92}
+main{max-width:820px;margin:0 auto;padding:16px}
+section{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;margin:16px 0}
+h2{margin:0 0 4px;font-size:1.15rem;color:var(--ac)}
+.hint{color:var(--mut);font-size:.9rem;margin:0 0 12px}
+.q{padding:12px 0;border-top:1px solid var(--bd)}
+.q.bad{outline:2px solid var(--err);outline-offset:4px;border-radius:8px}
+.q b.n{color:var(--ac)}
+label.opt{display:flex;gap:8px;align-items:flex-start;padding:7px 8px;border-radius:8px;cursor:pointer}
+label.opt:hover{background:var(--bg)}
+input[type=radio]{margin-top:5px;accent-color:var(--ac)}
+input[type=text],textarea,select{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit}
+textarea{min-height:90px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.row{grid-template-columns:1fr}}
+.pair{display:grid;grid-template-columns:1fr 150px;gap:10px;align-items:center;padding:8px 0;border-top:1px dashed var(--bd)}
+@media(max-width:560px){.pair{grid-template-columns:1fr}}
+.pair.bad{outline:2px solid var(--err);border-radius:8px}
+.quote{font-style:italic;font-size:.95rem}
+button{font:inherit;padding:12px 18px;border:0;border-radius:10px;background:var(--ac);color:#fff;cursor:pointer;margin:4px 6px 4px 0}
+button.sec{background:transparent;color:var(--ac);border:1px solid var(--ac)}
+#msg{font-weight:600;margin:8px 0}.err{color:var(--err)}.ok{color:var(--ok)}
+.ref{background:var(--bg);border-left:4px solid var(--ac);padding:8px 12px;border-radius:6px;font-size:.92rem}
+#prog{position:sticky;top:env(safe-area-inset-top,0px);background:var(--card);border-bottom:1px solid var(--bd);padding:6px 16px;font-size:.85rem;color:var(--mut);z-index:5}
+</style>
+</head>
+<body>
+<header><h1>Conto: Pré-modernismo e Modernismo</h1><p>Lima Barreto • Alcântara Machado • Clarice Lispector</p></header>
+<div id="prog">Respondidas: <span id="cnt">0</span> de <span id="tot">0</span></div>
+<main>
+<section>
+<h2>Identificação</h2>
+<p class="hint">Obrigatório. Tudo será enviado ao professor.</p>
+<div class="row">
+<div><label for="nome">Nome completo</label><input type="text" id="nome" autocomplete="name"></div>
+<div><label for="turma">Turma</label><input type="text" id="turma" placeholder="ex.: 2º Mecatrônica"></div>
+</div>
+</section>
+<section class="ref">
+<b>Antes de começar:</b> leia na apostila os três contos — <b>Texto 1</b> "O homem que sabia javanês" (Lima Barreto), <b>Texto 2</b> "Gaetaninho" (Alcântara Machado) e <b>Texto 3</b> "Uma galinha" (Clarice Lispector). Pesquise o que precisar e responda <b>todas</b> as questões: nenhuma pode ficar em branco.
+</section>
+<div id="app"></div>
+<section>
+<h2>Enviar ao professor</h2>
+<p class="hint">Ao terminar, clique em enviar. As respostas vão automaticamente para o professor. Só envie quando tiver respondido tudo.</p>
+<div id="msg"></div>
+<button id="send">Enviar atividades</button>
+<button class="sec" id="mail" style="display:none">Enviar pelo app de e-mail</button>
+<button class="sec" id="copy" style="display:none">Copiar respostas</button>
+<textarea id="out" readonly style="display:none;margin-top:10px;min-height:200px" aria-label="Respostas geradas"></textarea>
+</section>
+</main>
+<script>
+var MC=[
+["Texto 1 — A leitura do trecho inicial permite entender que o tema é uma:",["sátira social, pois trata do respeito e poder conferidos a quem fala bonito ou difícil.","crítica às pessoas que falam javanês e que trabalham no consulado de Java, no Brasil.","ironia bem-humorada, visto que narra a vida de uma personagem que faz trapalhadas linguísticas.","crítica político-social porque a personagem trabalha em um consulado estrangeiro.","reflexão sobre o papel e a sabedoria necessária a todo professor para exercer seu ofício."]],
+["Texto 1 — A frase em que se percebe crítica política é:",["Houve mesmo, uma dada ocasião, quando estive em Manaus, em que fui obrigado a esconder a minha qualidade de bacharel.","O que me admira, é que tenhas corrido tantas aventuras aqui, neste Brasil imbecil e burocrático.","Aqui mesmo, meu caro Castro, se podem arranjar belas páginas de vida.","Eu tinha chegado havia pouco ao Rio e estava literalmente na miséria.","Animado com esta saída feliz que me deu o javanês, voltei a procurar o anúncio."]],
+["Texto 1 — Em “Breve... Espere um pouco... Tenha paciência... Vou ser nomeado professor de javanês, e...”, as reticências indicam que a resposta da personagem demonstra:",["sabedoria.","susto.","chateação.","insegurança.","incerteza."]],
+["Texto 2 — Em “O Ford quase o derrubou e ele não viu o Ford. O carroceiro disse um palavrão e ele não ouviu o palavrão”, em qual alternativa a troca da conjunção “e” NÃO altera o sentido?",["ou","pois","entretanto","portanto","logo"]],
+["Texto 2 — Qual alternativa traz termos indicativos da origem italiana das personagens e do lugar em que ocorrem os fatos?",["Subito; palestrino - Rua Oriente.","Beppino; Peronetta - Araçá.","Gaetaninho; Beppino – cemitério.","Subito; Beppino – cemitério.","palestrino; Peronetta - Companhia de Gás."]],
+["Texto 3 — A personagem “galinha” simboliza:",["uma comemoração familiar frustrada.","a problemática social da mulher na década de 1960.","a necessidade de preservação da vida animal.","os desentendimentos familiares.","a fragilidade da vida de animais domésticos."]],
+["Texto 3 — Em “Era uma galinha de domingo. Ainda viva porque não passava de nove horas da manhã”, o termo “Ainda” faz pressupor que:",["a galinha continuará viva, porque é domingo.","não é bom matar galinha, a não ser no domingo.","tradicionalmente, galinha deve ser comida somente no domingo.","a galinha morreria mais tarde, para ser servida no almoço.","em geral, mata-se a galinha depois das dez horas da manhã."]],
+["Texto 3 — O narrador desse conto é:",["de primeira pessoa, pois se manifesta por meio da ausência de diálogos entre personagens.","de terceira pessoa, não participa dos acontecimentos como personagem, mas é onisciente, tudo sabe.","de primeira pessoa, visto que o emprego de pronomes e verbos se apresenta em primeira pessoa.","a personagem protagonista, ou seja, a galinha que narra em primeira pessoa.","de terceira pessoa, visto que representa “a menina”, uma personagem coadjuvante."]],
+["Pelo seu conhecimento e pelo estudo da apostila, o Texto 2 e o Texto 3 pertencem, respectivamente, à ___ e à ___ fase modernistas:",["primeira – segunda","primeira – terceira","segunda – segunda","segunda – terceira","terceira – terceira"]]
+];
+var ORD=["O sonho de Gaetaninho com o enterro e a boleia do carro","O menino ignora o Ford e a mãe o chama para dentro","O jogo de bola na calçada com Beppino e os amigos","Gaetaninho corre atrás da bola e é atropelado pelo bonde","No enterro, Beppino exibe o terno vermelho na boleia"];
+var FIG=[["T1","Andei pelas ruas, perambulando e mastigando letras."],["T1","Na minha cabeça dançavam hieróglifos."],["T2","Grito materno sim: até filho surdo escuta."],["T2","Atrás da tia Peronetta que se mudava para o Araçá."],["T2","Tia Filomena teve um ataque de nervos quando soube do sonho de Gaetaninho."],["T3","...nascida que fora para a maternidade, parecia uma velha mãe habituada."],["T3","Todos correram de novo à cozinha e rodearam mudos a jovem parturiente."],["T3","...era uma cabeça de galinha, a mesma que fora desenhada no começo dos séculos."]];
+var FOPT=["Metáfora","Comparação","Metonímia","Sinestesia","Eufemismo","Prosopopeia/personificação","Antítese","Hipérbole","Ironia","Onomatopeia","Paradoxo"];
+var DIS=[["T1","Houve mesmo, uma dada ocasião, quando estive em Manaus, em que fui obrigado a esconder a minha qualidade de bacharel [...]. Contava eu isso."],["T1","Por aí o homem interrompeu-me: — Que diabo vem a ser isso, Senhor Castelo?"],["T2","Tia Filomena teve um ataque de nervos quando soube do sonho de Gaetaninho. Tão forte que ele sentiu remorsos."],["T2","O Beppino por exemplo. O Beppino naquela tarde atravessara de carro a cidade. Mas como? Atrás da tia Peronetta que se mudava para o Araçá."],["T2","Gaetaninho enfiou a cabeça embaixo do travesseiro. Que beleza, rapaz! Na frente quatro cavalos pretos empenachados levavam a tia Filomena para o cemitério."],["T3","Que é que havia nas suas vísceras que fazia dela um ser? A galinha é um ser."],["T3","O pai de vez em quando ainda se lembrava: \"E dizer que a obriguei a correr naquele estado!\""]];
+var DOPT=["DN – discurso do narrador","DD – discurso direto","DI – discurso indireto","DIL – discurso indireto livre"];
+var WR=[
+"Texto 1 — Explique, pelo contexto, o sentido de: “as partidas que havia pregado às convicções e às respeitabilidades”.",
+"Texto 1 — Explique, pelo contexto, o sentido de: “se eu capiscasse quatro palavras”.",
+"Texto 1 — Explique, pelo contexto, o sentido de: “literatura digna de nota”.",
+"Texto 1 — Quais são as marcas textuais que identificam o narrador e o foco narrativo? Justifique.",
+"Texto 1 — Quais termos e expressões indicam o lugar e a época em que ocorrem os fatos narrados?",
+"Texto 1 — O tempo da narrativa é linear? Justifique.",
+"Texto 1 — Justifique o Texto 1 como representativo do Pré-Modernismo brasileiro.",
+"Texto 2 — Explique o sentido de: “banzando”, “ralé”, “cocre” e “muque”.",
+"Texto 2 — Na sua opinião, há ironia no final (“Quem na boleia de um dos carros do cortejo mirim exibia soberbo terno vermelho [...] era o Beppino”)? Justifique.",
+"Texto 2 — Quais são as marcas textuais que identificam o narrador e o foco narrativo? Justifique.",
+"Texto 2 — Em que período de tempo ocorrem os fatos narrados? Justifique.",
+"Texto 2 — Qual o efeito do uso do diminutivo em “devagarinho, devagarinho” e “beicinho”?",
+"Texto 3 — Em que período de tempo ocorrem os fatos narrados? Justifique.",
+"Comparando os três textos: há diferenças ou semelhanças no ritmo dado pela pontuação? Justifique."
+];
+var app=document.getElementById('app'),total=0;
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function sec(t,h,body){return '<section><h2>'+t+'</h2><p class="hint">'+h+'</p>'+body+'</section>'}
+var html='';
+var b='';
+MC.forEach(function(q,i){total++;b+='<div class="q" data-k="mc'+i+'"><b class="n">'+(i+1)+'.</b> '+esc(q[0]);
+q[1].forEach(function(o,j){b+='<label class="opt"><input type="radio" name="mc'+i+'" value="'+'ABCDE'[j]+'"><span><b>'+'ABCDE'[j]+')</b> '+esc(o)+'</span></label>'});b+='</div>'});
+html+=sec('Parte 1 – Marque X','Escolha uma alternativa em cada questão. Todas são obrigatórias.',b);
+b='<p><b>Texto 2 – “Gaetaninho”.</b> Numere os acontecimentos de 1 a 5 na ordem em que aparecem no conto (sem repetir números).</p>';
+total++;ORD.forEach(function(o,i){b+='<div class="pair" data-o="1"><span>'+esc(o)+'</span><select data-ord="'+i+'"><option value="">Posição…</option>'+[1,2,3,4,5].map(function(n){return '<option>'+n+'</option>'}).join('')+'</select></div>'});
+html+=sec('Parte 2 – Organize a sequência','Todas as posições devem ser preenchidas, sem repetir números.',b);
+b='';FIG.forEach(function(f,i){total++;b+='<div class="pair"><span><b>'+f[0]+'</b> <span class="quote">'+esc(f[1])+'</span></span><select data-f="'+i+'"><option value="">Figura…</option>'+FOPT.map(function(o){return '<option>'+o+'</option>'}).join('')+'</select></div>'});
+html+=sec('Parte 3 – Figuras de linguagem','Relacione cada trecho à figura de linguagem correspondente.',b);
+b='';DIS.forEach(function(f,i){total++;b+='<div class="pair"><span><b>'+f[0]+'</b> <span class="quote">'+esc(f[1])+'</span></span><select data-d="'+i+'"><option value="">Discurso…</option>'+DOPT.map(function(o){return '<option>'+o+'</option>'}).join('')+'</select></div>'});
+html+=sec('Parte 4 – Tipos de discurso','Classifique o discurso de cada trecho. Todas as escolhas são obrigatórias.',b);
+b='';WR.forEach(function(q,i){total++;b+='<div class="q" data-k="wr'+i+'"><b class="n">'+(i+1)+'.</b> '+esc(q)+'<textarea data-w="'+i+'" placeholder="Escreva sua resposta (mínimo 10 caracteres)"></textarea></div>'});
+html+=sec('Parte 5 – Respostas escritas','Resposta com suas próprias palavras. Obrigatória.',b);
+app.innerHTML=html;
+total+=2;document.getElementById('tot').textContent=total;
+function ordDone(){var s=[].slice.call(document.querySelectorAll('[data-ord]')).map(function(x){return x.value});return s.every(Boolean)&&new Set(s).size===5}
+function count(){var c=0;
+if(document.getElementById('nome').value.trim())c++;if(document.getElementById('turma').value.trim())c++;
+MC.forEach(function(_,i){if(document.querySelector('input[name=mc'+i+']:checked'))c++});
+if(ordDone())c++;
+['f','d'].forEach(function(k){document.querySelectorAll('[data-'+k+']').forEach(function(s){if(s.value)c++})});
+document.querySelectorAll('[data-w]').forEach(function(t){if(t.value.trim().length>=10)c++});
+document.getElementById('cnt').textContent=c;return c}
+document.addEventListener('input',count);document.addEventListener('change',count);
+function validate(){var first=null;
+function bad(el){el.classList.add('bad');if(!first)first=el}
+document.querySelectorAll('.bad').forEach(function(e){e.classList.remove('bad')});
+['nome','turma'].forEach(function(id){var e=document.getElementById(id);if(!e.value.trim())bad(e)});
+MC.forEach(function(_,i){if(!document.querySelector('input[name=mc'+i+']:checked'))bad(document.querySelector('[data-k=mc'+i+']'))});
+if(!ordDone())document.querySelectorAll('[data-o]').forEach(function(e){bad(e)});
+document.querySelectorAll('[data-f],[data-d]').forEach(function(s){if(!s.value)bad(s.closest('.pair'))});
+document.querySelectorAll('[data-w]').forEach(function(t){if(t.value.trim().length<10)bad(t.closest('.q'))});
+return first}
+function build(){var L=[];L.push('NOME: '+nome.value.trim());L.push('TURMA: '+turma.value.trim());L.push('ATIVIDADE: Conto – Pré-modernismo e Modernismo','');
+L.push('== PARTE 1 – MARCAR X ==');MC.forEach(function(_,i){L.push((i+1)+') '+document.querySelector('input[name=mc'+i+']:checked').value)});
+L.push('','== PARTE 2 – ORDEM (Gaetaninho) ==');document.querySelectorAll('[data-ord]').forEach(function(s,i){L.push(s.value+'º – '+ORD[i])});
+L.push('','== PARTE 3 – FIGURAS DE LINGUAGEM ==');document.querySelectorAll('[data-f]').forEach(function(s,i){L.push(FIG[i][0]+' "'+FIG[i][1].slice(0,45)+'…": '+s.value)});
+L.push('','== PARTE 4 – DISCURSO ==');document.querySelectorAll('[data-d]').forEach(function(s,i){L.push(DIS[i][0]+' "'+DIS[i][1].slice(0,45)+'…": '+s.value)});
+L.push('','== PARTE 5 – RESPOSTAS ESCRITAS ==');document.querySelectorAll('[data-w]').forEach(function(t,i){L.push((i+1)+') '+WR[i]);L.push('R: '+t.value.trim(),'')});
+return L.join('\n')}
+var msg=document.getElementById('msg'),out=document.getElementById('out');
+function prep(){var f=validate();if(f){msg.className='err';msg.textContent='Faltam respostas. Complete os campos marcados em vermelho.';f.scrollIntoView({behavior:'smooth',block:'center'});return null}
+var t=build();out.style.display='block';out.value=t;return t}
+var EMAIL='wesleyams@gmail.com';
+function sub(){return 'Atividade Conto – '+nome.value.trim()+' – '+turma.value.trim()}
+document.getElementById('send').onclick=function(){var t=prep();if(!t)return;var btn=this;btn.disabled=true;msg.className='';msg.textContent='Enviando… aguarde.';
+fetch('https://formsubmit.co/ajax/'+EMAIL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:sub(),_template:'box',Nome:nome.value.trim(),Turma:turma.value.trim(),Respostas:t})})
+.then(function(r){return r.json()}).then(function(d){if(d.success!=='true'&&d.success!==true)throw 0;
+msg.className='ok';msg.textContent='✔ Atividade enviada com sucesso! Pode fechar a página.';
+document.querySelectorAll('input,select,textarea').forEach(function(e){e.disabled=true})})
+.catch(function(){btn.disabled=false;msg.className='err';msg.textContent='Não foi possível enviar automaticamente. Use o botão "Enviar pelo app de e-mail" ou "Copiar respostas".';
+document.getElementById('mail').style.display='';document.getElementById('copy').style.display=''})};
+document.getElementById('mail').onclick=function(){var t=prep();if(!t)return;location.href='mailto:'+EMAIL+'?subject='+encodeURIComponent(sub())+'&body='+encodeURIComponent(t)};
+document.getElementById('copy').onclick=function(){var t=prep();if(!t)return;out.select();
+var done=function(){msg.className='ok';msg.textContent='Respostas copiadas. Cole em um e-mail para wesleyams@gmail.com.'};
+try{navigator.clipboard.writeText(t).then(done,function(){document.execCommand('copy');done()})}catch(e){try{document.execCommand('copy');done()}catch(e2){msg.className='err';msg.textContent='Selecione e copie o texto abaixo manualmente.'}}};
+count();
+</script>
+</body>
+</html>
